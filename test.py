@@ -1,6 +1,7 @@
 import logging
 import logging.handlers
 import os
+from bs4 import BeautifulSoup
 
 import requests
 
