@@ -22,6 +22,47 @@ logger_file_handler.setFormatter(formatter)
 logger.addHandler(logger_file_handler)
 
 
+def elabora_html(html):
+    soup = BeautifulSoup(html, "html.parser")
+    soup.find_all('tbody')
+    soup = BeautifulSoup(html)
+    tables = soup.findChildren('table')
+    # This will get the first (and only) table. Your page may have more.
+    my_table = tables[0]
+    # You can find children with multiple tags by passing a list of strings
+    rows = my_table.findChildren(['thead','th'])#, 'tr'])
+    righe=[]
+    for row in rows:
+        #print(">>>>>>>>>>>>>>>>>>>>>\n",row)
+        cells = row.findChildren('th')
+        r=[]
+        for cell in cells:
+            #print(cell)
+            value = cell.string
+            r.append(value)
+            #print("The value in this cell is %s" % value)
+        righe.append(r)
+    header=righe[0]
+    header[-1]='Open Interest' #Perche non mi legge svg
+    rows = my_table.findChildren(['th', 'tr'])
+    table=[]
+    for row in rows:
+        #print(">>>>>>>>>>>>>>>>>>>>>\n",row)
+        cells = row.findChildren('td')
+        r=[]
+        for cell in cells:
+            value = cell.string
+            r.append(value)
+            #print("The value in this cell is %s" % value)
+        if len(r)>0:
+            table.append(r)
+    
+    
+    df = pd.DataFrame(table, columns=header)
+    return df
+
+
+
 if __name__ == "__main__":
     url="https://www.borsaitaliana.it/borsa/derivati/indicatori-opzioni/open-interest.html"
     try:
@@ -31,7 +72,8 @@ if __name__ == "__main__":
         if response.status_code == 200:
             # Decodifica il contenuto della risposta in 'utf-8'
             html_content = response.content.decode('utf-8')
-            print(html_content)
+            df=elabora_html(html_content)
+            print(df
             print("OK OK OK ")
             logger.info(f'OK OK')
         else:
