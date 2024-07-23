@@ -24,9 +24,9 @@ logger.addHandler(logger_file_handler)
 
 
 def elabora_html(html):
-    soup = BeautifulSoup(html, "html.parser")
+    soup = BeautifulSoup(html, features="html.parser")
     soup.find_all('tbody')
-    soup = BeautifulSoup(html)
+    soup = BeautifulSoup(html,features="html.parser")
     tables = soup.findChildren('table')
     # This will get the first (and only) table. Your page may have more.
     my_table = tables[0]
