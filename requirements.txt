@@ -1,6 +1,6 @@
 pandas==2.0.3
-urllib.request=3.7
-bs4=4.9.3
-re=2.2.1
+urllib.request==3.7
+bs4==4.9.3
+re==2.2.1
 gzip
 datetime
