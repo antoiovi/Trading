@@ -75,7 +75,8 @@ if __name__ == "__main__":
         if response.status_code == 200:
             # Decodifica il contenuto della risposta in 'utf-8'
             html_content = response.content.decode('utf-8')
-            df=elabora_html(html_content)
+            print(html_content)
+            #df=elabora_html(html_content)
             #print(df)
             print("OK OK OK ")
             logger.info(f'OK OK')
