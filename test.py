@@ -59,7 +59,7 @@ def elabora_html(html):
             table.append(r)
     
     
-    df = pd.DataFrame(table, columns=header)
+    df = pd.DataFrame(table)#, columns=header)
     return df
 
 
