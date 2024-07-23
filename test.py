@@ -25,9 +25,17 @@ logger.addHandler(logger_file_handler)
 if __name__ == "__main__":
     url="https://www.borsaitaliana.it/borsa/derivati/indicatori-opzioni/open-interest.html"
     try:
-        r=requests.get(url)
-        print("OK OK OK ")
-        logger.info(f'OK OK')
+        # Effettua una richiesta GET
+        response = requests.get(url)
+        # Controlla che la richiesta sia stata completata con successo
+        if response.status_code == 200:
+            # Decodifica il contenuto della risposta in 'utf-8'
+            html_content = response.content.decode('utf-8')
+            print(html_content)
+            print("OK OK OK ")
+        else:
+            print(f"Errore nella richiesta: {response.status_code}")        
+                logger.info(f'OK OK')
     except Exception as e:
         logger.info(f'Exception raggiunta')
         print(e)
