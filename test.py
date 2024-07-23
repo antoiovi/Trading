@@ -24,10 +24,11 @@ logger.addHandler(logger_file_handler)
 
 
 def elabora_html(html):
-    soup = BeautifulSoup(html, features="html.parser")
-    soup.find_all('tbody')
+    #soup = BeautifulSoup(html, features="html.parser")
+    #soup.find_all('tbody')
     soup = BeautifulSoup(html,features="html.parser")
     tables = soup.findChildren('table')
+    print(tables)
     return tables
     # This will get the first (and only) table. Your page may have more.
     my_table = tables[0]
@@ -75,7 +76,7 @@ if __name__ == "__main__":
             # Decodifica il contenuto della risposta in 'utf-8'
             html_content = response.content.decode('utf-8')
             df=elabora_html(html_content)
-            print(df)
+            #print(df)
             print("OK OK OK ")
             logger.info(f'OK OK')
         else:
