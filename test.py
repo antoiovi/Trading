@@ -4,8 +4,8 @@ import os
 
 import requests
 
-import urllib.request
-import gzip
+#import urllib.request
+#import gzip
 
 
 
@@ -25,11 +25,7 @@ logger.addHandler(logger_file_handler)
 if __name__ == "__main__":
     url="https://www.borsaitaliana.it/borsa/derivati/indicatori-opzioni/open-interest.html"
     try:
-        request = urllib.request.Request(url)
-        request.add_header('Accept-encoding', 'gzip')
-        data = gzip.GzipFile(fileobj=urllib.request.urlopen(request)).read()
-        html = data.decode("utf-8")
-        logger.info(f'Html OK')
+        r=request(url)
         print("OK OK OK ")
     except Exception as e:
         logger.info(f'Exception raggiunta')
