@@ -27,6 +27,7 @@ if __name__ == "__main__":
     try:
         r=requests.get(url)
         print("OK OK OK ")
+        logger.info(f'OK OK')
     except Exception as e:
         logger.info(f'Exception raggiunta')
         print(e)
