@@ -25,7 +25,7 @@ logger.addHandler(logger_file_handler)
 if __name__ == "__main__":
     url="https://www.borsaitaliana.it/borsa/derivati/indicatori-opzioni/open-interest.html"
     try:
-        r=request(url)
+        r=requests(url)
         print("OK OK OK ")
     except Exception as e:
         logger.info(f'Exception raggiunta')
