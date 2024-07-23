@@ -18,7 +18,6 @@ logger.addHandler(logger_file_handler)
 
 
 if __name__ == "__main__":
-    logger.info(f"Token value: {SOME_SECRET}")
     url="https://www.borsaitaliana.it/borsa/derivati/indicatori-opzioni/open-interest.html"
     r = requests.get(url)
     if r.status_code == 200:
