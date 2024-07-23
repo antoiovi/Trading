@@ -33,18 +33,9 @@ if __name__ == "__main__":
             html_content = response.content.decode('utf-8')
             print(html_content)
             print("OK OK OK ")
+            logger.info(f'OK OK')
         else:
             print(f"Errore nella richiesta: {response.status_code}")        
-                logger.info(f'OK OK')
     except Exception as e:
         logger.info(f'Exception raggiunta')
         print(e)
-        
-    '''
-    r = requests.get(url)
-    if r.status_code == 200:
-        data = r.json()
-        print("STATUS 200")
-    else:
-      print("ERROR")
-    '''
