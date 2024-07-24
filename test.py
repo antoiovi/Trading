@@ -102,9 +102,9 @@ def merge_df(dflocal,dftemp,last_date):
         dfz.drop_duplicates(['Nome','Date'],inplace=True)
         return dfz
 
-except FileNotFoundError:
-    print("FILE NON ESISTE: CREO NUOVO FILE")
-    return None
+    except FileNotFoundError:
+        print("FILE NON ESISTE: CREO NUOVO FILE")
+        return None
         
 
 if __name__ == "__main__":
