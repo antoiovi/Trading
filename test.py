@@ -83,15 +83,34 @@ def display(x):
     
 def open_file():
     filename="openinterst.csv"
-    dfx=pd.read_csv(filename,index_col=False)
-    print(dfx)
-    #dfx['Date']=pd.to_datetime(dfx['Date'])
-    #dates=dfx['Date'].unique()
-    #dates
+    dflocal=pd.read_csv(filename,index_col=False)
+    dflocal['Date']=pd.to_datetime(dflocal['Date'])
+    return dflocal
+
+def merge_df(dflocal,dftemp,last_date):
+    today=dt.datetime.now()
+    try:
+        dates=dflocal['Date'].unique() # numpy.datetime64 
+        dates=[pd.to_datetime(d).date() for d in dates]#numpy.datetime64 to datetime
+        if last_date  in dates:
+            print("Last date in dates..")
+            dflocal=dflocal[dflocal['Date']!=pd.to_datetime(last_date)]
+            dfz=pd.concat([dflocal,dftemp]).reset_index(drop=True)
+        else:
+            print("Last date NOT in dates..")
+            dfz=pd.concat([dflocal,dftemp]).reset_index(drop=True)
+        dfz.drop_duplicates(['Nome','Date'],inplace=True)
+        return dfz
+
+except FileNotFoundError:
+    print("FILE NON ESISTE: CREO NUOVO FILE")
+    return None
+        
 
 if __name__ == "__main__":
     url="https://www.borsaitaliana.it/borsa/derivati/indicatori-opzioni/open-interest.html"
     try:
+        filename="openinterst.csv"
         # Effettua una richiesta GET
         response = requests.get(url)
         # Controlla che la richiesta sia stata completata con successo
@@ -112,7 +131,9 @@ if __name__ == "__main__":
                 print(df)
                 print("OK OK OK ")
                 logger.info(f'OK OK')
-                open_file()  
+                dflocal=open_file()  
+                newdf=merge_df(dflocal,dftemp,last_date)
+                newdf.to_csv(filename,index=False)
                 print("Open file OK OK OK ")
             else:
                 print("nessuna tabella")            
