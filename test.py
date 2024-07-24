@@ -2,6 +2,7 @@ import logging
 import logging.handlers
 import os
 from bs4 import BeautifulSoup
+import re
 
 import requests
 
@@ -23,47 +24,36 @@ logger_file_handler.setFormatter(formatter)
 logger.addHandler(logger_file_handler)
 
 
-def elabora_html(html):
-    #soup = BeautifulSoup(html, "html.parser")
-    #soup.find_all('tbody')
-    soup = BeautifulSoup(html,features=None)
-    tables = soup.findChildren('table')
-    print(tables)
-    return tables
-    # This will get the first (and only) table. Your page may have more.
-    my_table = tables[0]
-    # You can find children with multiple tags by passing a list of strings
-    rows = my_table.findChildren(['thead','th'])#, 'tr'])
-    righe=[]
-    for row in rows:
-        #print(">>>>>>>>>>>>>>>>>>>>>\n",row)
-        cells = row.findChildren('th')
-        r=[]
-        for cell in cells:
-            #print(cell)
-            value = cell.string
-            r.append(value)
-            #print("The value in this cell is %s" % value)
-        righe.append(r)
-    header=righe[0]
-    header[-1]='Open Interest' #Perche non mi legge svg
-    rows = my_table.findChildren(['th', 'tr'])
-    table=[]
-    for row in rows:
-        #print(">>>>>>>>>>>>>>>>>>>>>\n",row)
-        cells = row.findChildren('td')
-        r=[]
-        for cell in cells:
-            value = cell.string
-            r.append(value)
-            #print("The value in this cell is %s" % value)
-        if len(r)>0:
-            table.append(r)
+# Funzione per estrarre le tabelle da un HTML e creare dataframe
+def extract_tables_from_html(html):
+    # Trova tutte le tabelle nell'HTML
+    tables = re.findall(r'<table.*?>.*?</table>', html, re.DOTALL)
     
+    dataframes = []
     
-    df = pd.DataFrame(table)#, columns=header)
-    return df
-
+    for table in tables:
+        # Trova tutte le righe della tabella
+        rows = re.findall(r'<tr.*?>.*?</tr>', table, re.DOTALL)
+        
+        table_data = []
+        
+        for row in rows:
+            # Trova tutte le celle della riga (sia th che td)
+            cells = re.findall(r'<t[dh].*?>(.*?)</t[dh]>', row, re.DOTALL)
+            # Pulisce il contenuto delle celle da eventuali tag HTML
+            clean_cells = [re.sub(r'<.*?>', '', cell).strip() for cell in cells]
+            # Aggiungi la riga alla tabella, saltando l'ultima colonna
+            if clean_cells:
+                table_data.append(clean_cells[:-1])
+        
+        if table_data:
+            # Usa la prima riga come header
+            header = table_data[0]
+            data = table_data[1:]
+            df = pd.DataFrame(data, columns=header)
+            dataframes.append(df)
+    
+    return dataframes
 
 
 if __name__ == "__main__":
@@ -75,9 +65,14 @@ if __name__ == "__main__":
         if response.status_code == 200:
             # Decodifica il contenuto della risposta in 'utf-8'
             html_content = response.content.decode('utf-8')
-            print(html_content)
-            df=elabora_html(html_content)
-            #print(df)
+            # Estrae le tabelle e crea i dataframe
+            dfs = extract_tables_from_html(html_content)
+            if len(dfs)==0:
+                print("nessuna tabella...")
+            # Stampa i dataframe creati
+            for i, df in enumerate(dfs):
+                print(f"Tabella {i + 1}")
+                print(df)
             print("OK OK OK ")
             logger.info(f'OK OK')
         else:
