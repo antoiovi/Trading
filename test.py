@@ -100,11 +100,10 @@ if __name__ == "__main__":
                 df.dropna(inplace=True)
                 print("#################")
                 print(df)
+                print("OK OK OK ")
+                logger.info(f'OK OK')
             else:
-                print("nessuna tabella")            last_date=extract_day(html_content)
-                    print("Last day ",last_date )            
-                    print("OK OK OK ")
-                    logger.info(f'OK OK')
+                print("nessuna tabella")            
         else:
             print(f"Errore nella richiesta: {response.status_code}")        
     except Exception as e:
