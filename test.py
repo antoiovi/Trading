@@ -78,11 +78,13 @@ def extract_day(html):
         last_date=pd.to_datetime(test,format='%d/%m/%y').date()
     return last_date
 
-
+def display(x):
+    print(x)
+    
 def open_file():
     filename="openinterst.csv"
     dfx=pd.read_csv(filename,index_col=False)
-    display(dfx)
+    print(dfx)
     #dfx['Date']=pd.to_datetime(dfx['Date'])
     #dates=dfx['Date'].unique()
     #dates
