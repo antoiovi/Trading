@@ -79,6 +79,14 @@ def extract_day(html):
     return last_date
 
 
+def open_file():
+    filename="openinterest.csv"
+    dfx=pd.read_csv(filename,index_col=False)
+    display(dfx)
+    #dfx['Date']=pd.to_datetime(dfx['Date'])
+    #dates=dfx['Date'].unique()
+    #dates
+
 if __name__ == "__main__":
     url="https://www.borsaitaliana.it/borsa/derivati/indicatori-opzioni/open-interest.html"
     try:
@@ -102,6 +110,8 @@ if __name__ == "__main__":
                 print(df)
                 print("OK OK OK ")
                 logger.info(f'OK OK')
+                open_file()  
+                print("Open file OK OK OK ")
             else:
                 print("nessuna tabella")            
         else:
