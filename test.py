@@ -3,6 +3,7 @@ import logging.handlers
 import os
 from bs4 import BeautifulSoup
 import re
+import pandas as pd
 
 import requests
 
