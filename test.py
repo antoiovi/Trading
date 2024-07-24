@@ -80,7 +80,7 @@ def extract_day(html):
 
 
 def open_file():
-    filename="openinterest.csv"
+    filename="openinterst.csv"
     dfx=pd.read_csv(filename,index_col=False)
     display(dfx)
     #dfx['Date']=pd.to_datetime(dfx['Date'])
