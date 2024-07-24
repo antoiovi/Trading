@@ -90,17 +90,18 @@ if __name__ == "__main__":
             html_content = response.content.decode('utf-8')
             # Estrae le tabelle e crea i dataframe
             dfs = extract_tables_from_html(html_content)
-            if len(dfs)==0:
-                print("nessuna tabella...")
             # Stampa i dataframe creati
-            for i, df in enumerate(dfs):
-                print(f"Tabella {i + 1}")
+            if len(dfs)>0:
+                df=dfs[0] 
+                last_date=extract_day(html_content)
+                print("*Last day ",last_date )
+                df=df.iloc[:,:]
+                df['Date']=pd.to_datetime(last_date)
+                df.dropna(inplace=True)
+                print("#################")
                 print(df)
-                # Salva i dataframe in file CSV
-                df.to_csv(f'tabella_{i + 1}.csv', index=False)
-
-            # RECUPERA DATA
-            last_date=extract_day(html_content)
+    else:
+        print("nessuna tabella")            last_date=extract_day(html_content)
             print("Last day ",last_date )            
             print("OK OK OK ")
             logger.info(f'OK OK')
