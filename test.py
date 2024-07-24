@@ -24,9 +24,9 @@ logger.addHandler(logger_file_handler)
 
 
 def elabora_html(html):
-    #soup = BeautifulSoup(html, features="html.parser")
-    #soup.find_all('tbody')
-    soup = BeautifulSoup(html,features="html.parser")
+    soup = BeautifulSoup(html, "html.parser")
+    soup.find_all('tbody')
+    soup = BeautifulSoup(html,features=None)
     tables = soup.findChildren('table')
     print(tables)
     return tables
