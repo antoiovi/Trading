@@ -74,6 +74,10 @@ if __name__ == "__main__":
             for i, df in enumerate(dfs):
                 print(f"Tabella {i + 1}")
                 print(df)
+                # Salva i dataframe in file CSV
+                df.to_csv(f'tabella_{i + 1}.csv', index=False)
+
+            
             print("OK OK OK ")
             logger.info(f'OK OK')
         else:
