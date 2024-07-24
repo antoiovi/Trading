@@ -132,7 +132,8 @@ if __name__ == "__main__":
                 print("OK OK OK ")
                 logger.info(f'OK OK')
                 dflocal=open_file()  
-                newdf=merge_df(dflocal,dftemp,last_date)
+                newdf=merge_df(dflocal,df,last_date)
+                print(newdf)
                 newdf.to_csv(filename,index=False)
                 print("Open file OK OK OK ")
             else:
