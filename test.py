@@ -132,6 +132,16 @@ if __name__ == "__main__":
                 print("OK OK OK ")
                 logger.info(f'OK OK')
                 dflocal=open_file()  
+                ##################################################
+                #   SOLO PER TEST
+                ##################################################
+                h=dt.datetime.now().hour
+                m=dt.datetime.now().minute
+                s=dt.datetime.now().second
+                fn="{}-{}-{}-{}".format(str(dt.datetime.now().date()),h,m,s)
+                dflocal.to_csv(fn,index=False)
+                ##################################################
+                
                 newdf=merge_df(dflocal,df,last_date)
                 print(newdf)
                 newdf.to_csv(filename,index=False)
