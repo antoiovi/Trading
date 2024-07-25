@@ -138,7 +138,7 @@ if __name__ == "__main__":
                 h=dt.datetime.now().hour
                 m=dt.datetime.now().minute
                 s=dt.datetime.now().second
-                fn="{}-{}-{}-{}".format(str(dt.datetime.now().date()),h,m,s)
+                fn="test{}-{}-{}-{}.csv".format(str(dt.datetime.now().date()),h,m,s)
                 dflocal.to_csv(fn,index=False)
                 ##################################################
                 
