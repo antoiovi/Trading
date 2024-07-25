@@ -45,8 +45,11 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}     
 
     - name: push changes
-      uses: ad-m/github-push-action@v0.6.0
-      with:
+      #uses: ad-m/github-push-action@v0.6.0
+      run: |
+        git push -f origin master
+      env:
+      #with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main 
 
