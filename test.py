@@ -83,8 +83,7 @@ def display(x):
 
 def temp_file():
     ''' To avoid commit error in action if no new csv file is created or modified'''
-    df = pd.DataFrame(columns=['Date'])
-    df = df.append({"Date":dt.datetime.now()}, ignore_index=True)
+    df = pd.DataFrame([dt.datetime.now()],columns=['Date'])
     df.to_csv("temp_file.csv")
 
 def open_file():
