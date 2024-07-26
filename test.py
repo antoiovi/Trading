@@ -155,10 +155,14 @@ if __name__ == "__main__":
                 
                 newdf=merge_df(dflocal,df,last_date)
                 print(newdf)
-                newdf.to_csv(filename,index=False)
-                print("Open file OK OK OK ")
+                if newdf is not None:
+                    newdf.to_csv(filename,index=False)
+                    print("Open file OK OK OK ")
+                else:
+                    print("Data file htm non è maggiore dell'utlimo scraping. ")
+                    
             else:
-                print("nessuna tabella")            
+                print("nessuna tabella estratta da html")            
         else:
             print(f"Errore nella richiesta: {response.status_code}")        
     except Exception as e:
