@@ -40,8 +40,13 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add *.csv
-        git commit -m 'Add generated CSV files'
-        git push
+        if [[ `git status --porcelain` ]]; then
+          echo "OK: Changes detected."
+          git commit -m 'Add generated CSV files'
+          git push
+        else
+          echo "WARNING: No changes were detected."
+        fi
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}     
 
