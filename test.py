@@ -150,7 +150,7 @@ if __name__ == "__main__":
                 m=dt.datetime.now().minute
                 s=dt.datetime.now().second
                 fn="test{}-{}-{}-{}.csv".format(str(dt.datetime.now().date()),h,m,s)
-                dflocal.to_csv(fn,index=False)
+                #dflocal.to_csv(fn,index=False)
                 ##################################################
                 
                 newdf=merge_df(dflocal,df,last_date)
