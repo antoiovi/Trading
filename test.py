@@ -126,7 +126,6 @@ def merge_df(dflocal,dftemp,last_date):
 if __name__ == "__main__":
     url="https://www.borsaitaliana.it/borsa/derivati/indicatori-opzioni/open-interest.html"
     try:
-        temp_file()# To avoid commit error if no file is modified
         filename="openinterst.csv"
         # Effettua una richiesta GET
         response = requests.get(url)
