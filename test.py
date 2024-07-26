@@ -80,7 +80,13 @@ def extract_day(html):
 
 def display(x):
     print(x)
-    
+
+def temp_file():
+    ''' To avoid commit error in action if no new csv file is created or modified'''
+    df = pd.DataFrame(columns=['Date'])
+    df = df.append({"Date":dt.datetime.now()}, ignore_index=True)
+    df.to_csv("temp_file.csv")
+
 def open_file():
     filename="openinterst.csv"
     dflocal=pd.read_csv(filename,index_col=False)
@@ -121,6 +127,7 @@ def merge_df(dflocal,dftemp,last_date):
 if __name__ == "__main__":
     url="https://www.borsaitaliana.it/borsa/derivati/indicatori-opzioni/open-interest.html"
     try:
+        temp_file()# To avoid commit error if no file is modified
         filename="openinterst.csv"
         # Effettua una richiesta GET
         response = requests.get(url)
