@@ -81,10 +81,6 @@ def extract_day(html):
 def display(x):
     print(x)
 
-def temp_file():
-    ''' To avoid commit error in action if no new csv file is created or modified'''
-    df = pd.DataFrame([dt.datetime.now()],columns=['Date'])
-    df.to_csv("temp_file.csv")
 
 def open_file():
     filename="openinterst.csv"
@@ -92,11 +88,9 @@ def open_file():
     dflocal['Date']=pd.to_datetime(dflocal['Date'])
     return dflocal
 
-def merge_df(dflocal,dftemp,last_date):
+def merge_df(dflocal,dftemp):
     today=dt.datetime.now()
     try:
-
-        print(last_date)
         print(dflocal['Date'].max().date())
         print(dftemp['Date'].max().date())
         if dftemp['Date'].max().date()>dflocal['Date'].max().date():
@@ -106,17 +100,6 @@ def merge_df(dflocal,dftemp,last_date):
         else:
             print("dftemp date <= dflocal date..Non faccio il merge")
             return None
-        dates=dflocal['Date'].unique() # numpy.datetime64 
-        dates=[pd.to_datetime(d).date() for d in dates]#numpy.datetime64 to datetime
-        if last_date  in dates:
-            print("Last date in dates..")
-            dflocal=dflocal[dflocal['Date']!=pd.to_datetime(last_date)]
-            dfz=pd.concat([dflocal,dftemp]).reset_index(drop=True)
-        else:
-            print("Last date NOT in dates..")
-            dfz=pd.concat([dflocal,dftemp]).reset_index(drop=True)
-        dfz.drop_duplicates(['Nome','Date'],inplace=True)
-        return dfz
 
     except FileNotFoundError:
         print("FILE NON ESISTE: CREO NUOVO FILE")
@@ -131,6 +114,7 @@ if __name__ == "__main__":
         response = requests.get(url)
         # Controlla che la richiesta sia stata completata con successo
         if response.status_code == 200:
+            logger.info(f'Response status 200 : OK')
             # Decodifica il contenuto della risposta in 'utf-8'
             html_content = response.content.decode('utf-8')
             # Estrae le tabelle e crea i dataframe
@@ -158,18 +142,19 @@ if __name__ == "__main__":
                 #dflocal.to_csv(fn,index=False)
                 ##################################################
                 
-                newdf=merge_df(dflocal,df,last_date)
+                newdf=merge_df(dflocal,df)
                 print(newdf)
                 if newdf is not None:
                     newdf.to_csv(filename,index=False)
-                    print("Open file OK OK OK ")
+                    logger.info(f'Dati aggiornati')
                 else:
-                    print("Data file htm non è maggiore dell'utlimo scraping. ")
+                    logger.info(f'Dati NON aggiornati')
                     
             else:
-                print("nessuna tabella estratta da html")            
+                logger.warn(f'Nessuna tabella ne file html...')
         else:
             print(f"Errore nella richiesta: {response.status_code}")        
+            logger.error(f"Errore nella richiesta: {response.status_code}")        
     except Exception as e:
-        logger.info(f'Exception raggiunta')
+        logger.error(f'Exception raggiunta')
         print(e)
