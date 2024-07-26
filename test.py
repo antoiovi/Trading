@@ -90,6 +90,17 @@ def open_file():
 def merge_df(dflocal,dftemp,last_date):
     today=dt.datetime.now()
     try:
+
+        print(last_date)
+        print(dflocal['Date'].max().date())
+        print(dftemp['Date'].max().date())
+        if dftemp['Date'].max().date()>dflocal['Date'].max().date():
+            print("dftemp date> dflocal date..")
+            dfz=pd.concat([dflocal,dftemp]).reset_index(drop=True)
+            return dfz
+        else:
+            print("dftemp date <= dflocal date..Non faccio il merge")
+            return None
         dates=dflocal['Date'].unique() # numpy.datetime64 
         dates=[pd.to_datetime(d).date() for d in dates]#numpy.datetime64 to datetime
         if last_date  in dates:
