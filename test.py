@@ -130,25 +130,16 @@ if __name__ == "__main__":
                 print("#################")
                 print(df)
                 print("OK OK OK ")
-                logger.info(f'OK OK')
+                logger.info(f'Estratta tabella e creato dataframe da pagina html. OK')
                 dflocal=open_file()  
-                ##################################################
-                #   SOLO PER TEST
-                ##################################################
-                h=dt.datetime.now().hour
-                m=dt.datetime.now().minute
-                s=dt.datetime.now().second
-                fn="test{}-{}-{}-{}.csv".format(str(dt.datetime.now().date()),h,m,s)
-                #dflocal.to_csv(fn,index=False)
-                ##################################################
-                
+                logger.info(f'Aperto file locale . OK')
                 newdf=merge_df(dflocal,df)
                 print(newdf)
                 if newdf is not None:
                     newdf.to_csv(filename,index=False)
                     logger.info(f'Dati aggiornati')
                 else:
-                    logger.info(f'Dati NON aggiornati')
+                    logger.info(f'Dati NON aggiornati : data ultima tabella gia presente nei dati')
                     
             else:
                 logger.warn(f'Nessuna tabella ne file html...')
@@ -156,5 +147,5 @@ if __name__ == "__main__":
             print(f"Errore nella richiesta: {response.status_code}")        
             logger.error(f"Errore nella richiesta: {response.status_code}")        
     except Exception as e:
-        logger.error(f'Exception raggiunta')
+        logger.error(f'Exception raggiunta : non identificato errore ')
         print(e)
