@@ -1,3 +1,5 @@
+#Added to exclude local script for automatic commit and delate of openinters.vsv
+pull_openinterest.sh
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
