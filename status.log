@@ -171,3 +171,7 @@
 2024-09-01 01:11:29,447 - __main__ - INFO - Estratta tabella e creato dataframe da pagina html. OK
 2024-09-01 01:11:29,452 - __main__ - INFO - Aperto file locale . OK
 2024-09-01 01:11:29,453 - __main__ - INFO - Dati NON aggiornati : data ultima tabella gia presente nei dati
+2024-09-02 01:02:51,004 - __main__ - INFO - Response status 200 : OK
+2024-09-02 01:02:51,014 - __main__ - INFO - Estratta tabella e creato dataframe da pagina html. OK
+2024-09-02 01:02:51,019 - __main__ - INFO - Aperto file locale . OK
+2024-09-02 01:02:51,020 - __main__ - INFO - Dati NON aggiornati : data ultima tabella gia presente nei dati
