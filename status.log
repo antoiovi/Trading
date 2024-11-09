@@ -455,3 +455,7 @@
 2024-11-08 01:04:35,522 - __main__ - INFO - Estratta tabella e creato dataframe da pagina html. OK
 2024-11-08 01:04:35,526 - __main__ - INFO - Aperto file locale . OK
 2024-11-08 01:04:35,536 - __main__ - INFO - Dati aggiornati
+2024-11-09 01:02:47,555 - __main__ - INFO - Response status 200 : OK
+2024-11-09 01:02:47,566 - __main__ - INFO - Estratta tabella e creato dataframe da pagina html. OK
+2024-11-09 01:02:47,571 - __main__ - INFO - Aperto file locale . OK
+2024-11-09 01:02:47,582 - __main__ - INFO - Dati aggiornati
