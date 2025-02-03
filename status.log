@@ -799,3 +799,7 @@
 2025-02-02 01:07:49,626 - __main__ - INFO - Estratta tabella e creato dataframe da pagina html. OK
 2025-02-02 01:07:49,634 - __main__ - INFO - Aperto file locale . OK
 2025-02-02 01:07:49,634 - __main__ - INFO - Dati NON aggiornati : data ultima tabella gia presente nei dati
+2025-02-03 01:05:36,136 - __main__ - INFO - Response status 200 : OK
+2025-02-03 01:05:36,146 - __main__ - INFO - Estratta tabella e creato dataframe da pagina html. OK
+2025-02-03 01:05:36,153 - __main__ - INFO - Aperto file locale . OK
+2025-02-03 01:05:36,153 - __main__ - INFO - Dati NON aggiornati : data ultima tabella gia presente nei dati
