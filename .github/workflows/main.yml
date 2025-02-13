@@ -32,25 +32,23 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    #- name: Run test.py
-    - name: Run OICommodities.py
+    - name: Run test.py
       run: |
-        python actions/OICommodities.py
-    # python test.py
-    #- name: Commit 
-    #  run: |
-    #    git config --local user.email "action@github.com"
-    #    git config --local user.name "GitHub Action"
-    #    git add *.csv
-    #    git add *.log
-    #    if [[ `git status --porcelain` ]]; then
-    #      echo "OK: Changes detected."
-    #      git commit -m 'Add generated CSV files'
-    #      git push
-    #    else
-    #      echo "WARNING: No changes were detected."
-    #    fi
-    #  env:
-    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}     
+        python actions/OIStocks.py
+    - name: Commit 
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add *.csv
+        git add *.log
+        if [[ `git status --porcelain` ]]; then
+          echo "OK: Changes detected."
+          git commit -m 'Add generated CSV files'
+          git push
+        else
+          echo "WARNING: No changes were detected."
+        fi
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}     
 
    
