@@ -9,7 +9,7 @@ class OIcommodities():
         
     def __init__(self,filename='../csv/oicommodities.csv'):
         self.filename=filename
-        self.read_csv()
+        self.read_file()
         
     def read_file(self):
         try:
