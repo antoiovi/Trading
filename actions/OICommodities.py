@@ -9,7 +9,10 @@ class OIcommodities():
         
     def __init__(self,filename='csv/oicommodities.csv'):
         self.filename=filename
+        print("Read file")
         self.read_file()
+        print("Df readed :")
+        print(self.df)
         
     def read_file(self):
         try:
@@ -28,9 +31,16 @@ class OIcommodities():
             df1=self.read_infos()
             print("Read infos ok")
             print(df1.head(3))
+            print("try to concat")
             df2=pd.concat([self.df,df1])
+            print(df2.head(3))
+            print("Concat ok")
+            print("remove duplicated...")
             df2=df2.reset_index().drop_duplicates(subset=['Symbol','Date'], keep="last").set_index(['Symbol','Date'])
+            print("duplicated removed")
+            print("Try to save ...",self.filename)
             df2.to_csv(self.filename,index=False)
+            print("Saved OK")
             self.df=df2
         except:
             return None
