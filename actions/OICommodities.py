@@ -10,19 +10,20 @@ class OIcommodities():
     def __init__(self,filename='csv/oicommodities.csv'):
         self.filename=filename
         print("Read file")
-        self.read_file()
+        self.df=self.read_file()
         print("Df readed :")
         print(self.df)
         
     def read_file(self):
         try:
-            self.df=pd.read_csv(self.filename,index_col=False) 
-            self.df['Date']=pd.to_datetime(self.df['Date'])
-            self.df.set_index(['Symbol','Date'],inplace=True,drop=True)
+            df=pd.read_csv(self.filename,index_col=False) 
+            df['Date']=pd.to_datetime(self.df['Date'])
+            df.set_index(['Symbol','Date'],inplace=True,drop=True)
+            return df
         except Exception as e:
             print(e)
             print("Error Reading : ",self.filename)
-            self.df=None
+            return None
         
         
     def update(self):
@@ -37,7 +38,7 @@ class OIcommodities():
             print("Concat ok")
             print("remove duplicated...")
             df2=df2.reset_index().drop_duplicates(subset=['Symbol','Date'], keep="last").set_index(['Symbol','Date'])
-            df2.reset_index(inplace=True,drop=True)
+            df2.reset_index(inplace=True)
             print("duplicated removed")
             print("Try to save ...",self.filename)
             df2.to_csv(self.filename,index=False)
@@ -82,9 +83,11 @@ class OIcommodities():
 if __name__ == "__main__":
     print("Running OICommodities.....")
     oicomm=OIcommodities()
-    test=oicomm.update()
-    if test is None:
+    df=oicomm.update()
+    if df is None:
         print("Problems updating open interst file.")
+        print(df.head(3))
+        print(". . "*20)
     else:
         print("Open interests updated .")
     print('#'*20,'  FINE  ','#'*20)
