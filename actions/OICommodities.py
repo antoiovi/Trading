@@ -7,7 +7,7 @@ class OIcommodities():
     
     commodities=['SI=F','GC=F','HG=F','CL=F','BZ=F','NG=F','ZC=F','KE=F','ZS=F','CC=F','KC=F','SB=F']
         
-    def __init__(self,filename='../csv/oicommodities.csv'):
+    def __init__(self,filename='csv/oicommodities.csv'):
         self.filename=filename
         self.read_file()
         
