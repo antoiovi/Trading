@@ -24,7 +24,10 @@ class OIcommodities():
         
     def update(self):
         try:
+            print("Read infos start")
             df1=self.read_infos()
+            print("Read infos ok")
+            print(df1.head(3))
             df2=pd.concat([self.df,df1])
             df2=df2.reset_index().drop_duplicates(subset=['Symbol','Date'], keep="last").set_index(['Symbol','Date'])
             df2.to_csv(self.filename,index=False)
@@ -39,6 +42,7 @@ class OIcommodities():
                 data=yf.Ticker(symbol)
                 infos[symbol]=data.info
             except :
+                print("Error in raed infos reading ticker")
                 continue
         fields=['openInterest', 'currency', 'exchange', 'quoteType', 'symbol', 'underlyingSymbol', 'shortName']#,'uuid']
         records={}
