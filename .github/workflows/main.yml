@@ -1,4 +1,4 @@
-name: Esegui test.py
+name: Esegui actions/OIStocks.py
 
 on:
   push:
