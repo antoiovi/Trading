@@ -6,9 +6,9 @@ import datetime
 class OIcommodities():
     
     commodities=['SI=F','GC=F','HG=F','CL=F','BZ=F','NG=F','ZC=F','KE=F','ZS=F','CC=F','KC=F','SB=F']
-    filename='test.csv'
-    
-    def __init__(self):
+        
+    def __init__(self,filename='../csv/oicommodities.csv'):
+        self.filename=filename
         self.read_csv()
         
     def read_file(self):
