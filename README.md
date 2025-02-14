@@ -3,20 +3,10 @@
 This is a collaction of python routines and jupyter notebooks oriented to 
 financial trading.
 
-## Daily collection of open interest of stocks of "Borsa Italiana"
-* File test.py
-* requirements.txt
-* status.log
-* ./github/workflows/main.yml
-* status.log
 
-  The github workflow main.yml, using requirements.txt, launch test.py once every day, which
-  scraps data from web site of "Borsa Italiana" , to extract "Open Interest" about stocks of FTSEMIB.
-  The data are saved (appended ) into openinterest.csv and status.log is updated.
-
-    ### 13 February 2025
-    The action is has been temprarly disabled : a lot of data has been collected, useful to study the
-    stocks openinterst. 
+## Directories actions and .github/workflow
+Directories actions and .github/workflow contain some routines used to extract the open interest data
+of company share . See the README.md file in dthe directory actions for more details.
 
  
 ## Url to download yahoo financial data
