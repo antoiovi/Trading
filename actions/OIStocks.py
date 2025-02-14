@@ -83,7 +83,7 @@ def display(x):
 
 
 def open_file():
-    filename="openinterst.csv"
+    filename="csv/openinterst.csv"
     dflocal=pd.read_csv(filename,index_col=False)
     dflocal['Date']=pd.to_datetime(dflocal['Date'])
     return dflocal
@@ -109,7 +109,7 @@ def merge_df(dflocal,dftemp):
 if __name__ == "__main__":
     url="https://www.borsaitaliana.it/borsa/derivati/indicatori-opzioni/open-interest.html"
     try:
-        filename="openinterst.csv"
+        filename="csv/openinterst.csv"
         # Effettua una richiesta GET
         response = requests.get(url)
         # Controlla che la richiesta sia stata completata con successo
