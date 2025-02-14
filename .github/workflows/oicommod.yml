@@ -42,6 +42,7 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add *.csv
+        git add csv/*.csv
         #git add *.log
         if [[ `git status --porcelain` ]]; then
           echo "OK: Changes detected."

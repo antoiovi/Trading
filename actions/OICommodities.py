@@ -42,6 +42,7 @@ class OIcommodities():
             df2.to_csv(self.filename,index=False)
             print("Saved OK")
             self.df=df2
+            return self.df
         except:
             return None
         
