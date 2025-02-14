@@ -37,6 +37,7 @@ class OIcommodities():
             print("Concat ok")
             print("remove duplicated...")
             df2=df2.reset_index().drop_duplicates(subset=['Symbol','Date'], keep="last").set_index(['Symbol','Date'])
+            df2.reset_index(inplace=True,drop=True)
             print("duplicated removed")
             print("Try to save ...",self.filename)
             df2.to_csv(self.filename,index=False)
