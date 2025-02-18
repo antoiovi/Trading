@@ -17,7 +17,7 @@ class OIcommodities():
     def read_file(self):
         try:
             df=pd.read_csv(self.filename,index_col=False) 
-            df['Date']=pd.to_datetime(self.df['Date'])
+            df['Date']=pd.to_datetime(df['Date'])
             df.set_index(['Symbol','Date'],inplace=True,drop=True)
             return df
         except Exception as e:
